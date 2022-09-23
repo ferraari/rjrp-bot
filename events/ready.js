@@ -1,8 +1,10 @@
 const { ActivityType } = require('discord.js');
 const client = require('..');
 const chalk = require('chalk');
+const config = require('../config.json');
 
 client.on("ready", () => {
+
 	const activities = [
 		{ name: `L30 - RJRP`, type: ActivityType.Listening },
 		{ name: `Rio de Janeiro Roleplay 1.0`, type: ActivityType.Playing },
@@ -27,5 +29,12 @@ client.on("ready", () => {
 		client.user.setStatus(status[s])
 		s++;
 	}, 30000);
+	setInterval(() => {
+		const guild =  client.guilds.cache.get(config.guildID);
+		const channel =  guild.channels.cache.get(config.channelID);
+		const memberCount =  guild.memberCount;
+
+		channel.setName(`Membros: ${memberCount}`);
+	}, 300000);
 	console.log(chalk.red(`Conectado em ${client.user.tag}!`))
 });

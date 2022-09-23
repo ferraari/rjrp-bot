@@ -1,6 +1,8 @@
 {
 	"prefix": "t!",
 	"verifyRole": "",
+	"guildID":"1021937103187214436",
+	"channelID": "1022265579412918352",
 	"messages": {
 		"COOLDOWN_MESSAGE": "Você está em `<duration>` de cooldown!"
 	}
