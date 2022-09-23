@@ -1,5 +1,5 @@
 const { DiscordAPIError } = require('@discordjs/rest');
-const { Discord, ApplicationCommandType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ApplicationCommandOptionType, Embed } = require('discord.js');
+const { Discord, ApplicationCommandType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ApplicationCommandOptionType, Embed, PermissionsBitField } = require('discord.js');
 const ms = require('ms');
 module.exports = {
     name: 'timeout',
@@ -33,7 +33,7 @@ module.exports = {
         let duration = ms(time);
         let reason = interaction.options.get('motivo')?.value;
 
-        if (user.permissions.has('ADMINISTRATOR')) {
+        if (member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return interaction.reply({ content: 'Você não pode desativar um administrador!', ephemeral: true });
         }
 
@@ -56,7 +56,7 @@ module.exports = {
             .setFooter({text: `Desativado por ${interaction.user}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
             .setThumbnail("https://images-ext-2.discordapp.net/external/Qtj8JaD6bwxKVpKYCst5Of1FVn-vcJrrO6dpXDXry-0/%3Fsize%3D2048/https/cdn.discordapp.com/icons/640206150142525460/cbcccc12ed85f277a56cd46ed5428db7.png");
 
-        if (interaction.member.permissions.has('MANAGE_MESSAGES')) {
+        if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             interaction.channel.send({ embeds: [embed] });
             member.timeout( time, reason ? reason : 'nenhum motivo especificado' );
             interaction.reply({ content: 'Usuário desativado com sucesso!', ephemeral: true });
