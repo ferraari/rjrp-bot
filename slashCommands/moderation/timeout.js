@@ -33,6 +33,10 @@ module.exports = {
         let duration = ms(time);
         let reason = interaction.options.get('motivo')?.value;
 
+        if (user.permissions.has('ADMINISTRATOR')) {
+            return interaction.reply({ content: 'Você não pode desativar um administrador!', ephemeral: true });
+        }
+
         if (!user) {
             return interaction.reply({ content: 'Você precisa mencionar um usuário para desativar!', ephemeral: true });
         }
