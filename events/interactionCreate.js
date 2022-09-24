@@ -22,13 +22,13 @@ client.on('interactionCreate', async interaction => {
 				if(slashCommand.userPerms || slashCommand.botPerms) {
 					if(!interaction.memberPermissions.has(PermissionsBitField.resolve(slashCommand.userPerms || []))) {
 						const userPerms = new EmbedBuilder()
-						.setDescription(`🚫 ${interaction.user}, You don't have \`${slashCommand.userPerms}\` permissions to use this command!`)
+						.setDescription(`🚫 ${interaction.user}, Você não tem \`${slashCommand.userPerms}\` permissão para usar este comando!`)
 						.setColor('Red')
 						return interaction.reply({ embeds: [userPerms] })
 					}
 					if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.resolve(slashCommand.botPerms || []))) {
 						const botPerms = new EmbedBuilder()
-						.setDescription(`🚫 ${interaction.user}, I don't have \`${slashCommand.botPerms}\` permissions to use this command!`)
+						.setDescription(`🚫 ${interaction.user}, Eu não tenho \`${slashCommand.botPerms}\` permissão para usar este comando!`)
 						.setColor('Red')
 						return interaction.reply({ embeds: [botPerms] })
 					}
@@ -44,13 +44,13 @@ client.on('interactionCreate', async interaction => {
 				if(slashCommand.userPerms || slashCommand.botPerms) {
 					if(!interaction.memberPermissions.has(PermissionsBitField.resolve(slashCommand.userPerms || []))) {
 						const userPerms = new EmbedBuilder()
-						.setDescription(`🚫 ${interaction.user}, You don't have \`${slashCommand.userPerms}\` permissions to use this command!`)
+						.setDescription(`🚫 ${interaction.user}, Você não tem \`${slashCommand.userPerms}\` permissão para usar este comando!`)
 						.setColor('Red')
 						return interaction.reply({ embeds: [userPerms] })
 					}
 					if(!interaction.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.resolve(slashCommand.botPerms || []))) {
 						const botPerms = new EmbedBuilder()
-						.setDescription(`🚫 ${interaction.user}, I don't have \`${slashCommand.botPerms}\` permissions to use this command!`)
+						.setDescription(`🚫 ${interaction.user}, Eu não tenho \`${slashCommand.botPerms}\` permissão para usar este comando!`)
 						.setColor('Red')
 						return interaction.reply({ embeds: [botPerms] })
 					}

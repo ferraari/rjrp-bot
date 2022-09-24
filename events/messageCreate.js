@@ -22,13 +22,13 @@ client.on('messageCreate', async message => {
 				if(command.userPerms || command.botPerms) {
 					if(!message.member.permissions.has(PermissionsBitField.resolve(command.userPerms || []))) {
 						const userPerms = new EmbedBuilder()
-						.setDescription(`🚫 ${message.author}, You don't have \`${command.userPerms}\` permissions to use this command!`)
+						.setDescription(`🚫 ${message.author}, Você não tem \`${command.userPerms}\` permissão para executar este comando!`)
 						.setColor('Red')
 						return message.reply({ embeds: [userPerms] })
 					}
 					if(!message.guild.members.cache.get(client.user.id).permissions.has(PermissionsBitField.resolve(command.botPerms || []))) {
 						const botPerms = new EmbedBuilder()
-						.setDescription(`🚫 ${message.author}, I don't have \`${command.botPerms}\` permissions to use this command!`)
+						.setDescription(`🚫 ${message.author}, Eu não tenho \`${command.botPerms}\` permissão para executar este comando!`)
 						.setColor('Red')
 						return message.reply({ embeds: [botPerms] })
 					}
