@@ -24,10 +24,9 @@ client.on("guildMemberAdd", async (member) => {
     box.context.font = '72px sans-serif';
     box.context.fillStyle = '#00001';
 
-    Canvas.registerFont(path.resolve('C:/Users/conta/OneDrive/Desktop/Projetos/rjrp-main/fonts/phonkContrast.ttf'), { family: 'phonkContrast' });
+    Canvas.registerFont(path.resolve(__dirname, '../fonts/phonkContrast.ttf'), { family: 'phonkContrast' });
 
-    Canvas.loadImage(bg.then( async (i) => {
-
+    Canvas.loadImage(bg).then(async (i) => {
         var centerX = box.create.width / 5;
         var centerY = box.create.height / 2;
         var radius = 110;
@@ -48,7 +47,7 @@ client.on("guildMemberAdd", async (member) => {
         box.context.closePath();
         box.context.clip();
 
-        box.context.drawImage(await Canvas.loadImage(await memberAvatar), centerX - radius, centerY - radius, radius * 2, radius * 2);  
+        box.context.drawImage(await Canvas.loadImage(memberAvatar), centerX - radius, centerY - radius, radius * 2, radius * 2);
 
         let mensagem = new Discord.AttachmentBuilder(box.create.toBuffer(), `${member.user.tag}.png`)
         var roleID = 
@@ -56,8 +55,11 @@ client.on("guildMemberAdd", async (member) => {
                 role => role.id === config.roleID);
 
 
-        client.channels.cache.get(config.welcomeChannel).send({ files: [mensagem] });
+        client.channels.cache.get(config.welcomeChannel).send({content: `Olá, <@${member.user.id}>, seja muito bem vindo ao Rio de Janeiro Roleplay`, files: [mensagem] }).then
+        (msg => {
+            msg.react("🎉")
+        });
             
         member.roles.add(roleID);
-    }));
+    });
 });

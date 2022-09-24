@@ -1,6 +1,8 @@
 const { DiscordAPIError } = require('@discordjs/rest');
 const { Discord, ApplicationCommandType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ApplicationCommandOptionType, Embed, PermissionsBitField } = require('discord.js');
 const ms = require('ms');
+const config = require('../../config.json');
+
 module.exports = {
     name: 'timeout',
     description: 'Temporariamente desative um usuário do servidor',
@@ -33,11 +35,18 @@ module.exports = {
         let time = Number(interaction.options.get('tempo')?.value);
         let duration = ms(time);
         let reason = interaction.options.get('motivo')?.value;
+        let staffRoleID = config.staffRoleID;
 
-        if (member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-            return interaction.reply({ content: 'Você não pode desativar um administrador!', ephemeral: true });
+        if (!member) {
+            return interaction.reply({ content: 'Você precisa mencionar um usuário válido!', ephemeral: true });
         }
-
+        if (member.permissions.has('Administrator')) {
+            return interaction.reply({ content: 'Você não pode dar timeout de um administrador!', ephemeral: true });
+        }
+        
+        if (member.roles.cache.has(staffRoleID)) {
+            return interaction.reply({ content: 'Você não pode dar timeout de um membro da staff!', ephemeral: true });
+        }
         if (!user) {
             return interaction.reply({ content: 'Você precisa mencionar um usuário para desativar!', ephemeral: true });
         }
@@ -54,14 +63,13 @@ module.exports = {
             )
             .setColor('#8257E5')
             .setTimestamp()
-            .setFooter({text: `Desativado por ${interaction.user}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
+            .setFooter({text: `Desativado por ID: ${interaction.user}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
             .setThumbnail("https://images-ext-2.discordapp.net/external/Qtj8JaD6bwxKVpKYCst5Of1FVn-vcJrrO6dpXDXry-0/%3Fsize%3D2048/https/cdn.discordapp.com/icons/640206150142525460/cbcccc12ed85f277a56cd46ed5428db7.png");
 
         if (interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             interaction.channel.send({ embeds: [embed] });
-            member.timeout( time, reason ? reason : 'nenhum motivo especificado' );
+            member.timeout( 1000 * time, reason ? reason : 'nenhum motivo especificado' );
             interaction.reply({ content: 'Usuário desativado com sucesso!', ephemeral: true });
-            
         } else {
             interaction.reply({ content: 'Você não tem permissão para usar esse comando!', ephemeral: true });
         }

@@ -5,6 +5,7 @@
 	"channelID": "1022265579412918352",
 	"welcomeChannel": "1023075350353297468",
 	"roleID":"1022268696040841236",
+	"staffRoleID":"1022258860532187147",
 	"messages": {
 		"COOLDOWN_MESSAGE": "Você está em `<duration>` de cooldown!"
 	}
