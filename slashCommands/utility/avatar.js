@@ -17,6 +17,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
         .setTitle(`${user.tag}'s avatar`)
+        .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 1024 }))
         .setImage(user.displayAvatarURL({ size: 4096 }))
         .setColor('Fuchsia')
         .setTimestamp();

@@ -1,3 +1,6 @@
+const { channel } = require('diagnostics_channel');
+var Canvas = require('canvas');
+const Discord = require('discord.js');
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
 const client = new Client({
 	intents: [
@@ -6,7 +9,10 @@ const client = new Client({
 		GatewayIntentBits.GuildPresences, 
 		GatewayIntentBits.GuildMessageReactions, 
 		GatewayIntentBits.DirectMessages,
-		GatewayIntentBits.MessageContent
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildVoiceStates,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildMessageTyping,
 	], 
 	partials: [Partials.Channel, Partials.Message, Partials.User, Partials.GuildMember, Partials.Reaction] 
 });
