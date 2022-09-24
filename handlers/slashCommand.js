@@ -49,7 +49,7 @@ module.exports = (client) => {
 					Routes.applicationCommands(CLIENT_ID), 
 					{ body: slashCommands }
 				);
-				console.log(chalk.yellow('Slash Commands • Registered'))
+				console.log(chalk.yellow('Slash Commands • Registrados com sucesso!'));
 			} catch (error) {
 				console.log(error);
 			}

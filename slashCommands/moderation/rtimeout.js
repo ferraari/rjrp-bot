@@ -4,6 +4,7 @@ module.exports = {
     name: 'rtimeout',
     description: 'Remove o timeout de um usuário',
     type: ApplicationCommandType.ChatInput,
+    default_member_permissions: 'Administrator',
     cooldown: 3000,
     options: [
         {

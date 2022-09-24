@@ -5,6 +5,7 @@ module.exports = {
     name: 'timeout',
     description: 'Temporariamente desative um usuário do servidor',
     type: ApplicationCommandType.ChatInput,
+    default_member_permissions: 'Administrator',
     cooldown: 3000,
     options: [
         {
