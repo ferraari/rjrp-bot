@@ -11,7 +11,7 @@ client.on('interactionCreate', async interaction => {
         if(button.permissions) {
             if(!interaction.memberPermissions.has(PermissionsBitField.resolve(button.permissions || []))) {
                 const perms = new EmbedBuilder()
-                .setDescription(`🚫 ${interaction.user}, You don't have \`${button.permissions}\` permissions to interact this button!`)
+                .setDescription(`🚫 ${interaction.user}, Você não tem \`${button.permissions}\` permissão para executar este botão!`)
                 .setColor('Red')
                 return interaction.reply({ embeds: [perms], ephemeral: true })
             }
