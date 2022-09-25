@@ -55,7 +55,7 @@ client.on("guildMemberAdd", async (member) => {
                 role => role.id === config.roleID);
 
 
-        client.channels.cache.get(config.welcomeChannel).send({content: `Olá, <@${member.user.id}>, seja muito bem vindo ao Rio de Janeiro Roleplay`, files: [mensagem] }).then
+        client.channels.cache.get(config.welcomeChannel).send({content: `Olá, <@${member.user.id}>, seja muito bem vindo(a) ao Rio de Janeiro Roleplay`, files: [mensagem] }).then
         (msg => {
             msg.react("🎉")
         });

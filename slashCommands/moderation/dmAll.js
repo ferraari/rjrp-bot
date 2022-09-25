@@ -20,13 +20,47 @@ module.exports = {
         if(!message) {
             return interaction.reply({ content: 'Você precisa especificar uma mensagem para eu enviar!', ephemeral: true });
         }
-        removeBot.forEach(member => {
-            member.send(message).catch(error => {
-                console.log(error)
-                interaction.channel.send(`Não consegui enviar a mensagem para o usuário ${member}`);
-            });
+        
+
+        interaction.reply({
+            content: `Você tem certeza que deseja enviar a mensagem para todos os membros do servidor? Isso pode causar danos irrevessiveis, ou perca de grande numero de membros`, 
+            ephemeral: true, 
+            components: [
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 2,
+                            style: 1,
+                            label: 'Sim, eu assumo os riscos!',
+                            custom_id: 'sim'
+                        },
+                        {
+                            type: 2,
+                            style: 4,
+                            label: 'Não, eu não quero!',
+                            custom_id: 'nao'
+                        }
+                    ]
+                }
+            
+                ]})
+        const filter = (i) => i.customId === 'sim' || i.customId === 'nao';
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+
+        collector.on('collect', async (i) => {
+            if(i.customId === 'sim') {
+                await i.update({ content: 'Enviando mensagem para todos os membros do servidor...', components: [] });
+                await i.channel.send(`Mensagem enviada em todas DM's por ${interaction.user}`);
+                await removeBot.forEach(member => {
+                    member.send(message).catch(error => {
+                        console.log(error)
+                        interaction.channel.send(`Não consegui enviar a mensagem para o usuário ${member}`);
+                    });
+                });
+            } else {
+                i.update({ content: 'Mensagem não enviada!', components: [] });
+            }
         });
-        interaction.channel.send({ content: `Mensagem enviada para todos os membros do servidor! Por: ${interaction.user} `});
-        interaction.reply({ content: `Concluido! `, ephemeral: true });
     }
 }
