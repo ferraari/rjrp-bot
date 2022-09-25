@@ -16,14 +16,17 @@ module.exports = {
     ],
     run: async (client, interaction) => {
         const message = interaction.options.get('mensagem')?.value;
+        removeBot = interaction.guild.members.cache.filter(member => !member.user.bot); 
         if(!message) {
             return interaction.reply({ content: 'Você precisa especificar uma mensagem para eu enviar!', ephemeral: true });
         }
-        interaction.guild.members.cache.forEach(member => {
-            member.send(message).catch(e => {
-                interaction.channel.send(`Não consegui enviar a mensagem para alguns membros!!`);
+        removeBot.forEach(member => {
+            member.send(message).catch(error => {
+                console.log(error)
+                interaction.channel.send(`Não consegui enviar a mensagem para o usuário ${member}`);
             });
         });
-        interaction.reply({ content: 'Mensagem enviada para todos os membros do servidor!', ephemeral: true });
+        interaction.channel.send({ content: `Mensagem enviada para todos os membros do servidor! Por: ${interaction.user} `});
+        interaction.reply({ content: `Concluido! `, ephemeral: true });
     }
 }
