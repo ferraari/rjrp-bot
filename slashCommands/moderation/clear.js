@@ -27,6 +27,7 @@ module.exports = {
         }
         await interaction.channel.bulkDelete(amount, true);
         interaction.reply({ content: `Foram apagadas ${amount} mensagens!`, ephemeral: true });
+        interaction.channel.send({ content: `Foram apagadas ${amount} mensagens`, ephemeral: false });
 
     }
 
