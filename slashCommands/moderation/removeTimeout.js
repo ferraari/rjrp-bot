@@ -28,6 +28,22 @@ module.exports = {
         const memberMentioned = guild.members.cache.get(user);
         const staffRoleID = config.staffRoleID;
 
+       
+
+        if (!memberMentioned) {
+            return interaction.reply({ content: 'Você precisa mencionar um usuário válido!', ephemeral: true });
+        }
+        if (memberMentioned.permissions.has('Administrator')) {
+            return interaction.reply({ content: 'Você não pode remover o timeout de um administrador!', ephemeral: true });
+        }
+        
+        if (memberMentioned.roles.cache.has(staffRoleID)) {
+            return interaction.reply({ content: 'Você não pode remover o timeout de um membro da staff!', ephemeral: true });
+        }
+        if (!user) {
+            return interaction.reply({ content: 'Você precisa mencionar um usuário para desativar!', ephemeral: true });
+        }
+
         memberMentioned.timeout(null, reason).then(() => {
             interaction.reply({ content: `O timeout de <@${user}> foi removido com sucesso!`, ephemeral: true });
             const embed = new EmbedBuilder()
@@ -43,20 +59,6 @@ module.exports = {
                 .setFooter({text: `ID: ${user}`, iconURL: memberMentioned.user.displayAvatarURL({ dynamic: true })});
             interaction.channel.send({ embeds: [embed] });
         });
-
-        if (!memberMentioned) {
-            return interaction.reply({ content: 'Você precisa mencionar um usuário válido!', ephemeral: true });
-        }
-        if (memberMentioned.permissions.has('Administrator')) {
-            return interaction.reply({ content: 'Você não pode remover o timeout de um administrador!', ephemeral: true });
-        }
-        
-        if (memberMentioned.roles.cache.has(staffRoleID)) {
-            return interaction.reply({ content: 'Você não pode remover o timeout de um membro da staff!', ephemeral: true });
-        }
-        if (!user) {
-            return interaction.reply({ content: 'Você precisa mencionar um usuário para desativar!', ephemeral: true });
-        }
         
     }
 }
