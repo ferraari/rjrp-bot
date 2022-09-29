@@ -6,7 +6,7 @@ const config = require('../config.json');
 client.on("ready", () => {
 
 	const activities = [
-		{ name: `L30 - RJRP`, type: ActivityType.Listening },
+		{ name: `Venha jogar conosco`, type: ActivityType.Listening },
 		{ name: `Rio de Janeiro Roleplay 1.0`, type: ActivityType.Playing },
 		{ name: `${client.users.cache.size} Jogadores`, type: ActivityType.Watching },
 		{ name: `Seu destino é aqui!`, type: ActivityType.Competing }

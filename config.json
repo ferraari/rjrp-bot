@@ -1,13 +1,13 @@
 {
 	"prefix": "t!",
-	"verifyRole": "1023261699102482512",
-	"guildID":"1021937103187214436", 
-	"channelID": "1022265579412918352",
-	"welcomeChannel": "1023075350353297468",
-	"roleID":"1022268696040841236",
-	"staffRoleID":"1022258860532187147",
-	"ticketCategoryID":"1023624816248488076",
-	"logTicketsID":"1023638654192734340",
+	"verifyRole": "1024750633481424927",
+	"guildID":"640206150142525460", 
+	"channelID": "1024750949736124416",
+	"welcomeChannel": "1024749997222264925",
+	"roleID":"1024750589604790322",
+	"staffRoleID":"1024752036257992724",
+	"ticketCategoryID":"1024394905889558609",
+	"logTicketsID":"1024750163782271016",
 	"messages": {
 		"COOLDOWN_MESSAGE": "Você está em `<duration>` de cooldown!"
 	}

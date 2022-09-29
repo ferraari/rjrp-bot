@@ -16,7 +16,7 @@ module.exports = {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         const embed = new EmbedBuilder()
-        .setTitle(`${user.tag}'s avatar`)
+        .setTitle(`${user.tag}'s avatar`)   
         .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 1024 }))
         .setImage(user.displayAvatarURL({ size: 4096 }))
         .setColor('Fuchsia')
